@@ -1,0 +1,19 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": "commonjs"
+      }
+    ],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    [
+      "babel-plugin-file-loader",
+      {
+        "extensions": ["css", "scss", "less"]
+      }
+    ]
+  ]
+}
