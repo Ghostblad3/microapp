@@ -7,7 +7,7 @@ const First = () => {
 
   return (
     <div className={styles.container}>
-      Microfrontend A Component – references redux defined in the shell
+      Microfrontend B Component – references redux defined in the shell
       <p>Count: {count}</p>
       <div className={styles.buttons}>
         <button onClick={() => dispatch({ type: 'INCREMENT' })}>

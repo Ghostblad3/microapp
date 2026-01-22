@@ -1,11 +1,13 @@
 import { withRouter } from 'react-router-dom';
 import { useEffect } from 'react';
 import styles from './styles/shell.module.css';
-import { config } from 'microfrontendA';
+import { config as configA } from 'microfrontendA';
+import { config as configB } from 'microfrontendB';
 
 const Shell = ({ history, children }) => {
   const isInShell = history.location.pathname === '/';
   const isInMicrofrontendA = history.location.pathname === '/microfrontendA';
+  const isInMicrofrontendB = history.location.pathname === '/microfrontendB';
 
   useEffect(() => {
     return () => {
@@ -36,7 +38,17 @@ const Shell = ({ history, children }) => {
               history.push('/microfrontendA');
             }}
           >
-            Microfrontend 1
+            Microfrontend A
+          </div>
+          <div
+            className={`${styles.menuItem} ${
+              isInMicrofrontendB ? styles.menuItemActive : ''
+            }`}
+            onClick={() => {
+              history.push('/microfrontendB');
+            }}
+          >
+            Microfrontend B
           </div>
         </div>
         <div className={styles.microFrontendBody}>{children}</div>

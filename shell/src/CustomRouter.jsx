@@ -2,18 +2,24 @@ import { Component } from './Component.jsx';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React, { lazy, Suspense, useEffect } from 'react';
 import { Shell } from './Shell.jsx';
-// const MicroApp = lazy(() =>
-//   import('rsbuild-microapp-js').then((mod) => ({
-//     default: mod.app ?? mod.default,
-//   }))
-// );
-
 import { injectReducer } from './store';
 
 const MicrofrontendA = lazy(() =>
   import('microfrontendA').then((mod) => {
     if (mod.microfrontendAReducer) {
       injectReducer('microfrontendA', mod.microfrontendAReducer);
+    }
+
+    return {
+      default: mod.app ?? mod.default,
+    };
+  })
+);
+
+const MicrofrontendB = lazy(() =>
+  import('microfrontendB').then((mod) => {
+    if (mod.microfrontendBReducer) {
+      injectReducer('microfrontendB', mod.microfrontendBReducer);
     }
 
     return {
@@ -31,6 +37,10 @@ const routes = [
   {
     path: '/microfrontendA',
     Component: MicrofrontendA,
+  },
+  {
+    path: '/microfrontendB',
+    Component: MicrofrontendB,
   },
 ];
 

@@ -2,21 +2,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import styles from './styles/Component.module.css';
 
 const Second = () => {
-  const count = useSelector((state) => state.microfrontendA.count);
+  const count = useSelector((state) => state.microfrontendB.count);
   const dispatch = useDispatch();
 
   return (
     <div className={styles.container}>
-      Microfrontend A Component – references redux defined in the microfrontend
+      Microfrontend B Component – references redux defined in the microfrontend
       <p>Count: {count}</p>
       <div className={styles.buttons}>
         <button
-          onClick={() => dispatch({ type: 'INCREMENT_MICROFRONTEND_A_COUNT' })}
+          onClick={() => dispatch({ type: 'INCREMENT_MICROFRONTEND_B_COUNT' })}
         >
           Increment
         </button>
         <button
-          onClick={() => dispatch({ type: 'DECREMENT_MICROFRONTEND_A_COUNT' })}
+          onClick={() => dispatch({ type: 'DECREMENT_MICROFRONTEND_B_COUNT' })}
         >
           Decrement
         </button>

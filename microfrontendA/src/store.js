@@ -4,9 +4,9 @@ const initialState = {
 
 const microfrontendAReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'INCREMENT_CHILD_COUNT':
+    case 'INCREMENT_MICROFRONTEND_A_COUNT':
       return { count: state.count + 1 };
-    case 'DECREMENT_CHILD_COUNT':
+    case 'DECREMENT_MICROFRONTEND_A_COUNT':
       return { count: state.count - 1 };
     default:
       return state;

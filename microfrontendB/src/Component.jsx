@@ -1,11 +1,17 @@
 import { useEffect, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { microfrontendACustomRouter } from './Routes';
+import { microfrontendBCustomRouter } from './Routes';
 import { Menu } from './Menu';
 import styles from './styles/Component.module.css';
 
 const Component = () => {
-  const routes = microfrontendACustomRouter();
+  const routes = microfrontendBCustomRouter();
+
+  useEffect(() => {
+    return () => {
+      console.log('unmount');
+    };
+  }, []);
 
   return (
     <div className={styles.inner}>
