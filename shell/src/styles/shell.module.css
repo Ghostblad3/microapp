@@ -36,7 +36,7 @@ main {
 
 .menu {
   height: 100%;
-  width: 110px;
+  width: 150px;
   flex: 0 0 auto;
 }
 
@@ -49,12 +49,12 @@ main {
   background-color: lightgray;
 }
 
-.microAppBody {
+.menuItemActive {
+  background-color: lightgray;
+}
+
+.microFrontendBody {
   height: calc(100vh - 50px);
   width: calc(100% - 110px);
   background-color: #e9ecef;
-}
-
-.microAppBodyInternal {
-  padding: 15px;
 }

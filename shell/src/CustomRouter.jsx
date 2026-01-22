@@ -1,36 +1,68 @@
-import { ComponentFromShell } from './ComponentFromShell.jsx';
+import { Component } from './Component.jsx';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { Shell } from './Shell.jsx';
-import { app as MicroApp } from 'rsbuild-microapp-js';
+// const MicroApp = lazy(() =>
+//   import('rsbuild-microapp-js').then((mod) => ({
+//     default: mod.app ?? mod.default,
+//   }))
+// );
 
-const customRouter = [
+import { injectReducer } from './store';
+
+const MicrofrontendA = lazy(() =>
+  import('microfrontendA').then((mod) => {
+    if (mod.microfrontendAReducer) {
+      injectReducer('microfrontendA', mod.microfrontendAReducer);
+    }
+
+    return {
+      default: mod.app ?? mod.default,
+    };
+  })
+);
+
+const routes = [
   {
     path: '/',
     exact: true,
-    Component: <ComponentFromShell />,
+    Component: Component,
   },
   {
-    path: '/microfrontend',
-    exact: true,
-    Component: <MicroApp />,
+    path: '/microfrontendA',
+    Component: MicrofrontendA,
   },
 ];
 
-function CustomRouter() {
+const CustomRouter = () => {
+  window.__REACT__ = React;
+
+  useEffect(() => {
+    return () => {
+      console.log('unmount');
+    };
+  }, []);
+
   return (
     <Router>
-      <Switch>
-        {customRouter.map((route, i) => (
-          <Route
-            key={i}
-            path={route.path}
-            exact={route.exact}
-            render={() => <Shell>{route.Component}</Shell>}
-          />
-        ))}
-      </Switch>
+      <Shell>
+        <Switch>
+          {routes.map(({ path, exact, Component }, i) => (
+            <Route
+              key={i}
+              path={path}
+              exact={exact}
+              render={() => (
+                <Suspense fallback={<div>Loading microfrontend…</div>}>
+                  <Component />
+                </Suspense>
+              )}
+            />
+          ))}
+        </Switch>
+      </Shell>
     </Router>
   );
-}
+};
 
 export { CustomRouter };

@@ -3,7 +3,7 @@ import { store } from './store';
 import { ErrorBoundary } from './ErrorBoundary.jsx';
 import { CustomRouter } from './CustomRouter.jsx';
 
-function App() {
+const App = () => {
   return (
     <ErrorBoundary>
       <Provider store={store}>
@@ -11,6 +11,6 @@ function App() {
       </Provider>
     </ErrorBoundary>
   );
-}
+};
 
 export { App };

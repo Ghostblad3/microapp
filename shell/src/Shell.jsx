@@ -1,31 +1,49 @@
 import { withRouter } from 'react-router-dom';
-import styles from './shell.module.css';
+import { useEffect } from 'react';
+import styles from './styles/shell.module.css';
+import { config } from 'microfrontendA';
 
-function Shell({ history, children }) {
+const Shell = ({ history, children }) => {
+  const isInShell = history.location.pathname === '/';
+  const isInMicrofrontendA = history.location.pathname === '/microfrontendA';
+
+  useEffect(() => {
+    return () => {
+      console.log('unmount');
+    };
+  }, []);
+
   return (
     <div className={styles.container}>
-      <header>
-        <div>Shell</div>
-      </header>
+      <header>{/* <div>Repo: {isInShell ? 'Shell' : config}</div> */}</header>
       <main>
         <div className={styles.menu}>
-          <div className={styles.menuItem} onClick={() => history.push('/')}>
+          <div
+            className={`${styles.menuItem} ${
+              isInShell ? styles.menuItemActive : ''
+            }`}
+            onClick={() => {
+              history.push('/');
+            }}
+          >
             Shell
           </div>
           <div
-            className={styles.menuItem}
-            onClick={() => history.push('/microfrontend')}
+            className={`${styles.menuItem} ${
+              isInMicrofrontendA ? styles.menuItemActive : ''
+            }`}
+            onClick={() => {
+              history.push('/microfrontendA');
+            }}
           >
-            Microapp
+            Microfrontend 1
           </div>
         </div>
-        <div className={styles.microAppBody}>
-          <div className={styles.microAppBodyInternal}>{children}</div>
-        </div>
+        <div className={styles.microFrontendBody}>{children}</div>
       </main>
     </div>
   );
-}
+};
 
 const routed = withRouter(Shell);
 export { routed as Shell };

@@ -1,10 +1,10 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
-const initialState = {
-  count: 0,
-};
+/* -------- shell reducer -------- */
 
-function counterReducer(state = initialState, action) {
+const initialShellState = { count: 0 };
+
+const shellReducer = (state = initialShellState, action) => {
   switch (action.type) {
     case 'INCREMENT':
       return { count: state.count + 1 };
@@ -13,9 +13,38 @@ function counterReducer(state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+/* -------- reducer factory -------- */
+
+const staticReducers = {
+  shell: shellReducer,
+};
+
+const createRootReducer = (asyncReducers) => {
+  return combineReducers({
+    ...staticReducers,
+    ...asyncReducers,
+  });
+};
+
+/* -------- store -------- */
 
 export const store = createStore(
-  counterReducer,
+  createRootReducer({}),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+/* keep track of injected reducers */
+store.asyncReducers = {};
+
+/* -------- injection API -------- */
+
+const injectReducer = (key, reducer) => {
+  if (store.asyncReducers[key]) return;
+
+  store.asyncReducers[key] = reducer;
+  store.replaceReducer(createRootReducer(store.asyncReducers));
+};
+
+export { injectReducer };

@@ -1,5 +1,5 @@
 {
-  "name": "rsbuild-microapp-js",
+  "name": "microfrontend-1",
   "version": "1.0.0",
   "private": true,
   "main": "cjs/index.js",
@@ -8,14 +8,9 @@
   ],
   "type": "module",
   "scripts": {
-    "build:cjs": "babel src --out-dir cjs --source-maps --extensions \".js,.jsx\" --copy-files --watch"
+    "watch": "babel src --out-dir cjs --extensions \".js,.jsx\" --copy-files --watch"
   },
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-redux": "8",
-    "redux": "^5.0.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.28.6",
     "@babel/core": "^7.28.6",
@@ -24,12 +19,15 @@
     "babel-plugin-file-loader": "^2.0.0",
     "babel-plugin-transform-assets": "^1.0.2",
     "prettier": "^3.6.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "react-redux": "8",
+    "redux": "^5.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "4"
   },
   "peerDependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-redux": "8",
-    "redux": "^5.0.1"
+    "react-dom": "^18.3.1"
   }
 }
