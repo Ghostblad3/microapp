@@ -1,17 +1,11 @@
-import { useEffect, Suspense } from 'react';
+import { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { microfrontendBCustomRouter } from './Routes';
+import { microfrontendBCustomRouter } from '../routes/routes';
 import { Menu } from './Menu';
-import styles from './styles/Component.module.css';
+import styles from './styles/Layout.module.css';
 
-const Component = () => {
+const Layout = () => {
   const routes = microfrontendBCustomRouter();
-
-  useEffect(() => {
-    return () => {
-      console.log('unmount');
-    };
-  }, []);
 
   return (
     <div className={styles.inner}>
@@ -36,4 +30,4 @@ const Component = () => {
   );
 };
 
-export { Component };
+export { Layout };

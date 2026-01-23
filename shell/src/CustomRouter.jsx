@@ -1,7 +1,7 @@
 import { Component } from './Component.jsx';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React, { lazy, Suspense, useEffect } from 'react';
-import { Shell } from './Shell.jsx';
+import { Layout } from './Layout.jsx';
 import { injectReducer } from './store';
 
 const MicrofrontendA = lazy(() =>
@@ -47,15 +47,9 @@ const routes = [
 const CustomRouter = () => {
   window.__REACT__ = React;
 
-  useEffect(() => {
-    return () => {
-      console.log('unmount');
-    };
-  }, []);
-
   return (
     <Router>
-      <Shell>
+      <Layout>
         <Switch>
           {routes.map(({ path, exact, Component }, i) => (
             <Route
@@ -70,7 +64,7 @@ const CustomRouter = () => {
             />
           ))}
         </Switch>
-      </Shell>
+      </Layout>
     </Router>
   );
 };

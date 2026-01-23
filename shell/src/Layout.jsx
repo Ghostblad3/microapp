@@ -1,21 +1,14 @@
 import { withRouter } from 'react-router-dom';
-import { useEffect } from 'react';
-import styles from './styles/shell.module.css';
+import styles from './styles/Layout.module.css';
 import { config as configA } from 'microfrontendA';
 import { config as configB } from 'microfrontendB';
 
-const Shell = ({ history, children }) => {
+const Layout = ({ history, children }) => {
   const isInShell = history.location.pathname === '/' && 'Shell';
   const isInMicrofrontendA =
     history.location.pathname.includes('microfrontendA') && configA;
   const isInMicrofrontendB =
     history.location.pathname.includes('/microfrontendB') && configB;
-
-  useEffect(() => {
-    return () => {
-      console.log('unmount');
-    };
-  }, []);
 
   return (
     <div className={styles.container}>
@@ -61,5 +54,5 @@ const Shell = ({ history, children }) => {
   );
 };
 
-const routed = withRouter(Shell);
-export { routed as Shell };
+const routed = withRouter(Layout);
+export { routed as Layout };

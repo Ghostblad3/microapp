@@ -1,10 +1,10 @@
-import { useEffect, Suspense } from 'react';
+import { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { microfrontendACustomRouter } from './Routes';
+import { microfrontendACustomRouter } from '../routes/routes';
 import { Menu } from './Menu';
-import styles from './styles/Component.module.css';
+import styles from './styles/Layout.module.css';
 
-const Component = () => {
+const Layout = () => {
   const routes = microfrontendACustomRouter();
 
   return (
@@ -30,4 +30,4 @@ const Component = () => {
   );
 };
 
-export { Component };
+export { Layout };

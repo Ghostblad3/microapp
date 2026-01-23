@@ -1,24 +1,24 @@
-import React, { lazy } from 'react';
-// import { First } from './First';
-// import { Second } from './Second';
-// import { Default } from './Default';
+import { lazy } from 'react';
+// import { First } from '../components/First';
+// import { Second } from '../components/Second';
+// import { Default } from '../components/Default';
 
 const BASE_PATH = '/microfrontendA';
 
 const Default = lazy(() =>
-  import('./Default').then((module) => ({
+  import('../components/Default').then((module) => ({
     default: module.Default,
   }))
 );
 
 const First = lazy(() =>
-  import('./First').then((module) => ({
+  import('../components/First').then((module) => ({
     default: module.First,
   }))
 );
 
 const Second = lazy(() =>
-  import('./Second').then((module) => ({
+  import('../components/Second').then((module) => ({
     default: module.Second,
   }))
 );

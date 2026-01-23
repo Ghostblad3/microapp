@@ -1,7 +1,7 @@
-import { Component } from './Component';
-import { microfrontendAReducer } from './store';
+import { Layout } from './components/Layout';
+import { microfrontendAReducer } from './store/store';
 
-const app = Component;
+const app = Layout;
 
 const config = 'Microfrontend A';
 
