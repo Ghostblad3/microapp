@@ -5,9 +5,11 @@ import { config as configA } from 'microfrontendA';
 import { config as configB } from 'microfrontendB';
 
 const Shell = ({ history, children }) => {
-  const isInShell = history.location.pathname === '/';
-  const isInMicrofrontendA = history.location.pathname === '/microfrontendA';
-  const isInMicrofrontendB = history.location.pathname === '/microfrontendB';
+  const isInShell = history.location.pathname === '/' && 'Shell';
+  const isInMicrofrontendA =
+    history.location.pathname.includes('microfrontendA') && configA;
+  const isInMicrofrontendB =
+    history.location.pathname.includes('/microfrontendB') && configB;
 
   useEffect(() => {
     return () => {
@@ -17,7 +19,9 @@ const Shell = ({ history, children }) => {
 
   return (
     <div className={styles.container}>
-      <header>{/* <div>Repo: {isInShell ? 'Shell' : config}</div> */}</header>
+      <header>
+        <div>Repo: {isInShell || isInMicrofrontendA || isInMicrofrontendB}</div>
+      </header>
       <main>
         <div className={styles.menu}>
           <div

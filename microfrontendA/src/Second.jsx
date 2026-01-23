@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import styles from './styles/Component.module.css';
+import styles from './styles/Second.module.css';
 
 const Second = () => {
   const count = useSelector((state) => state.microfrontendA.count);

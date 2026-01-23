@@ -1,0 +1,9 @@
+.menu {
+  padding: 15px;
+  background-color: lightgreen;
+  height: calc(100vh - 50px - 30px);
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

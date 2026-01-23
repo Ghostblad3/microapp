@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import styles from './styles/Component.module.css';
+import styles from './styles/First.module.css';
 
 const First = () => {
   const count = useSelector((state) => state.shell.count);
