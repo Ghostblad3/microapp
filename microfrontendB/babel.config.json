@@ -3,12 +3,4 @@
     ["@babel/preset-env", { "modules": false }],
     ["@babel/preset-react", { "runtime": "automatic" }]
   ]
-  // "plugins": [
-  //   [
-  //     "babel-plugin-file-loader",
-  //     {
-  //       "extensions": ["css", "scss", "less"]
-  //     }
-  //   ]
-  // ]
 }

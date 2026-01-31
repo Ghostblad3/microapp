@@ -32,7 +32,7 @@ const Layout = ({ history, children }) => {
               isInMicrofrontendA ? styles.menuItemActive : ''
             }`}
             onClick={() => {
-              history.push('/microfrontendA');
+              history.push('/microfrontendA/first');
             }}
           >
             Microfrontend A
@@ -42,7 +42,7 @@ const Layout = ({ history, children }) => {
               isInMicrofrontendB ? styles.menuItemActive : ''
             }`}
             onClick={() => {
-              history.push('/microfrontendB');
+              history.push('/microfrontendB/first');
             }}
           >
             Microfrontend B
@@ -54,5 +54,6 @@ const Layout = ({ history, children }) => {
   );
 };
 
-const routed = withRouter(Layout);
-export { routed as Layout };
+const LayoutWithRouter = withRouter(Layout);
+
+export { LayoutWithRouter as Layout };

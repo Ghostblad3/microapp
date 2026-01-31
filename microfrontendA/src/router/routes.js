@@ -1,15 +1,8 @@
 import { lazy } from 'react';
 // import { First } from '../components/First';
 // import { Second } from '../components/Second';
-// import { Default } from '../components/Default';
 
 const BASE_PATH = '/microfrontendA';
-
-const Default = lazy(() =>
-  import('../components/Default').then((module) => ({
-    default: module.Default,
-  }))
-);
 
 const First = lazy(() =>
   import('../components/First').then((module) => ({
@@ -23,12 +16,7 @@ const Second = lazy(() =>
   }))
 );
 
-const microfrontendACustomRouter = () => [
-  {
-    path: `${BASE_PATH}/`,
-    exact: true,
-    Component: Default,
-  },
+const routes = [
   {
     path: `${BASE_PATH}/first`,
     exact: true,
@@ -41,4 +29,4 @@ const microfrontendACustomRouter = () => [
   },
 ];
 
-export { microfrontendACustomRouter };
+export { routes };

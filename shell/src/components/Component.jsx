@@ -5,6 +5,8 @@ const Component = () => {
   const count = useSelector((state) => state.shell.count);
   const dispatch = useDispatch();
 
+  console.log('hi');
+
   return (
     <div className={styles.component}>
       This Component is defined inside the shell application - it references the
