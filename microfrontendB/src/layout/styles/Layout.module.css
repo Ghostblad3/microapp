@@ -1,0 +1,21 @@
+.inner {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.buttons button {
+  flex: 1;
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.routesWrapper {
+  padding: 15px;
+  width: calc(100% - 30px);
+  height: calc(100% - 30px);
+}
