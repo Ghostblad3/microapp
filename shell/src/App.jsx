@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { store } from './store/store.js';
 import { ErrorBoundary } from './components/ErrorBoundary.jsx';
 import { AppRouter } from './router/AppRouter.jsx';
 

@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { injectReducer } from '../store';
+import { injectReducer } from '../store/store.js';
 
 const Component = lazy(() =>
   import('../components/Component.jsx').then(module => ({

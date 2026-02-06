@@ -4,16 +4,23 @@ import { config as configA } from 'microfrontendA';
 import { config as configB } from 'microfrontendB';
 
 const Layout = ({ history, children }) => {
-  const isInShell = history.location.pathname === '/' && 'Shell';
+  const isInShell = history.location.pathname === '/';
   const isInMicrofrontendA =
-    history.location.pathname.includes('microfrontendA') && configA;
+    history.location.pathname.includes('microfrontendA') ;
   const isInMicrofrontendB =
-    history.location.pathname.includes('/microfrontendB') && configB;
+    history.location.pathname.includes('/microfrontendB') ;
+
+  const headerTitle = isInShell ? 'Shell'
+    : isInMicrofrontendA
+    ? configA
+    : isInMicrofrontendB
+    ? configB
+    : 'Unknown';
 
   return (
     <div className={styles.container}>
       <header>
-        <div>Repo: {isInShell || isInMicrofrontendA || isInMicrofrontendB}</div>
+        <div>Repo: {headerTitle}</div>
       </header>
       <main>
         <div className={styles.menu}>

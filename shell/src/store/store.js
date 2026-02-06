@@ -30,7 +30,7 @@ const createRootReducer = (asyncReducers) => {
 
 /* -------- store -------- */
 
-export const store = createStore(
+const store = createStore(
   createRootReducer({}),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
@@ -47,4 +47,4 @@ const injectReducer = (key, reducer) => {
   store.replaceReducer(createRootReducer(store.asyncReducers));
 };
 
-export { injectReducer };
+export { store, injectReducer };

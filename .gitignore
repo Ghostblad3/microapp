@@ -7,7 +7,7 @@
 node_modules
 dist/
 esm
-cjs
+**/cjs/
 
 # Profile
 .rspack-profile-*/
