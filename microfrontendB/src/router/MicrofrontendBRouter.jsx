@@ -5,14 +5,14 @@ import { routes } from './routes';
 const MicrofrontendBRouter = () => {
   return (
     <Switch>
-      {routes.map(({ path, exact, Component }, i) => (
+      {routes.map(({ path, exact, Component, routes }, i) => (
         <Route
           key={i}
           path={path}
           exact={exact}
           render={() => (
             <Suspense fallback={<div>Loading...</div>}>
-              <Component />
+              <Component routes={routes} />
             </Suspense>
           )}
         />

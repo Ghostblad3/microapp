@@ -4,8 +4,11 @@ import styles from './styles/Menu.module.css';
 const BASE_PATH = '/microfrontendA';
 
 const Menu = ({ history }) => {
-  const isFirstPage = history.location.pathname === `${BASE_PATH}/first`;
-  const isSecondPage = history.location.pathname === `${BASE_PATH}/second`;
+  const isFirstPage = history.location.pathname.includes(`${BASE_PATH}/first`);
+  const isSecondPage = history.location.pathname.includes(
+    `${BASE_PATH}/second`
+  );
+  const isThirdPage = history.location.pathname.includes(`${BASE_PATH}/third`);
 
   return (
     <div className={styles.menu}>
@@ -20,6 +23,12 @@ const Menu = ({ history }) => {
         onClick={() => history.push(`${BASE_PATH}/second`)}
       >
         Second
+      </div>
+      <div
+        className={`${styles.button} ${isThirdPage ? styles.buttonSelected : ''}`}
+        onClick={() => history.push(`${BASE_PATH}/third`)}
+      >
+        Third
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import { lazy } from 'react';
 // import { First } from '../components/First';
 // import { Second } from '../components/Second';
+// import { Third } from '../components/third/Third';
+// import { NestedComponent } from '../components/third/NestedComponent';
 
 const BASE_PATH = '/microfrontendB';
 
@@ -16,6 +18,18 @@ const Second = lazy(() =>
   }))
 );
 
+const Third = lazy(() =>
+  import('../components/third/Third').then((module) => ({
+    default: module.Third,
+  }))
+);
+
+const NestedComponent = lazy(() =>
+  import('../components/third/NestedComponent').then((module) => ({
+    default: module.NestedComponent,
+  }))
+);
+
 const routes = [
   {
     path: `${BASE_PATH}/first`,
@@ -26,6 +40,16 @@ const routes = [
     path: `${BASE_PATH}/second`,
     exact: true,
     Component: Second,
+  },
+  {
+    path: `${BASE_PATH}/third`,
+    Component: Third,
+    routes: [
+      {
+        path: `${BASE_PATH}/third/subpage`,
+        Component: NestedComponent,
+      },
+    ],
   },
 ];
 
