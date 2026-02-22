@@ -3,6 +3,7 @@ import { lazy } from 'react';
 // import { Second } from '../components/Second';
 // import { Third } from '../components/third/Third';
 // import { SubComponentA } from '../components/third/SubComponentA';
+// import { SubComponentB } from '../components/third/SubComponentB';
 
 const BASE_PATH = '/microfrontendA';
 
