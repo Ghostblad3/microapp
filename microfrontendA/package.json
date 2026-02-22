@@ -6,7 +6,6 @@
   "files": [
     "cjs"
   ],
-  "type": "module",
   "scripts": {
     "watch": "babel src --out-dir cjs --extensions \".js,.jsx\" --copy-files --watch"
   },
