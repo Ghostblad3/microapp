@@ -1,14 +1,15 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React, { Suspense } from 'react';
-import { Layout } from '../layout/Layout.jsx';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { Layout } from '../layout/Layout';
+import { ErrorBoundary } from '../components/ErrorBoundary';
 import { routes } from './routes.js';
+import { history } from '../store/store.js';
 
-const AppRouter = () => {
-  window.__REACT__ = React;
-
+const Internal = () => {
   return (
-    <Router>
-      <Layout>
+    <Layout>
+      <ErrorBoundary>
         <Switch>
           {routes.map(({ path, exact, Component }, i) => (
             <Route
@@ -16,15 +17,35 @@ const AppRouter = () => {
               path={path}
               exact={exact}
               render={() => (
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<>Loading...</>}>
                   <Component />
                 </Suspense>
               )}
             />
           ))}
         </Switch>
-      </Layout>
-    </Router>
+      </ErrorBoundary>
+    </Layout>
+  );
+};
+
+const AppRouter = () => {
+  window.__REACT__ = React;
+
+  const useBrowserRouter = false;
+
+  return (
+    <>
+      {useBrowserRouter ? (
+        <BrowserRouter>
+          <Internal />
+        </BrowserRouter>
+      ) : (
+        <ConnectedRouter history={history}>
+          <Internal />
+        </ConnectedRouter>
+      )}
+    </>
   );
 };
 

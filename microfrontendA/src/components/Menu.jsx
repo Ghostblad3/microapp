@@ -9,6 +9,7 @@ const Menu = ({ history }) => {
     `${BASE_PATH}/second`
   );
   const isThirdPage = history.location.pathname.includes(`${BASE_PATH}/third`);
+  const isForthPage = history.location.pathname.includes(`${BASE_PATH}/forth`);
 
   return (
     <div className={styles.menu}>
@@ -29,6 +30,12 @@ const Menu = ({ history }) => {
         onClick={() => history.push(`${BASE_PATH}/third`)}
       >
         Third
+      </div>
+      <div
+        className={`${styles.button} ${isForthPage ? styles.buttonSelected : ''}`}
+        onClick={() => history.push(`${BASE_PATH}/forth`)}
+      >
+        Forth
       </div>
     </div>
   );

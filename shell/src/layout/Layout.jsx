@@ -1,21 +1,22 @@
 import { withRouter } from 'react-router-dom';
-import styles from './styles/Layout.module.css';
 import { config as configA } from 'microfrontendA';
 import { config as configB } from 'microfrontendB';
+import styles from './styles/Layout.module.css';
 
 const Layout = ({ history, children }) => {
   const isInShell = history.location.pathname === '/';
   const isInMicrofrontendA =
-    history.location.pathname.includes('microfrontendA') ;
+    history.location.pathname.includes('microfrontendA');
   const isInMicrofrontendB =
-    history.location.pathname.includes('/microfrontendB') ;
+    history.location.pathname.includes('/microfrontendB');
 
-  const headerTitle = isInShell ? 'Shell'
+  const headerTitle = isInShell
+    ? 'Shell'
     : isInMicrofrontendA
-    ? configA
-    : isInMicrofrontendB
-    ? configB
-    : 'Unknown';
+      ? configA
+      : isInMicrofrontendB
+        ? configB
+        : 'Unknown';
 
   return (
     <div className={styles.container}>

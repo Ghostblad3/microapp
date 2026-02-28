@@ -24,7 +24,12 @@ const Third = ({ history, routes }) => {
         {routes && (
           <Switch>
             {routes.map(({ path, exact, Component }, i) => (
-              <Route key={i} path={path} exact={exact} component={Component} />
+              <Route
+                key={i}
+                path={path}
+                exact={exact}
+                render={() => <Component />}
+              />
             ))}
           </Switch>
         )}

@@ -1,8 +1,15 @@
+import { useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+import { MicrofrontendARouter } from '../router/MicrofrontendARouter';
 import { Menu } from '../components/Menu';
 import styles from './styles/Layout.module.css';
-import { MicrofrontendARouter } from '../router/MicrofrontendARouter';
 
-const Layout = () => {
+const Layout = ({ history }) => {
+  useEffect(() => {
+    if (history.location.pathname === '/microfrontendA/')
+      history.replace('/microfrontendA/first');
+  }, [history.location.pathname]);
+
   return (
     <div className={styles.inner}>
       <Menu />
@@ -13,4 +20,6 @@ const Layout = () => {
   );
 };
 
-export { Layout };
+const LayoutWithRouter = withRouter(Layout);
+
+export { LayoutWithRouter as Layout };

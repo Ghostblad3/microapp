@@ -3,6 +3,6 @@ import { microfrontendAReducer } from './store/store';
 
 const app = Layout;
 
-const config = 'Microfrontend A';
+const config = 'microfrontendA';
 
 export { app, config, microfrontendAReducer };

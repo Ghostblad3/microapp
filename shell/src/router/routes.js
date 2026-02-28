@@ -1,35 +1,52 @@
 import { lazy } from 'react';
 import { injectReducer } from '../store/store.js';
+import { config as configA } from 'microfrontendA';
+import { config as configB } from 'microfrontendB';
 
-const Component = lazy(() =>
-  import('../components/Component.jsx').then(module => ({
-    default: module.Component,
-  }))
+const lazyWithMinDelay = (
+  importFn,
+  exportName,
+  { minDelay, injectReducer, reducerName, key } = {
+    minDelay: 200,
+  }
+) =>
+  lazy(() => {
+    const start = Date.now();
+
+    return importFn().then(async (module) => {
+      // Inject reducer if provided and exists
+      if (injectReducer && reducerName && module[reducerName]) {
+        injectReducer(key, module[reducerName]);
+      }
+
+      // Wait for minimum delay
+      const elapsed = Date.now() - start;
+      if (elapsed < minDelay) {
+        await new Promise((r) => setTimeout(r, minDelay - elapsed));
+      }
+
+      return { default: module[exportName] };
+    });
+  });
+
+const Component = lazyWithMinDelay(
+  () => import('../components/Component'),
+  'Component'
 );
 
-const MicrofrontendA = lazy(() =>
-  import('microfrontendA').then((mod) => {
-    if (mod.microfrontendAReducer) {
-      injectReducer('microfrontendA', mod.microfrontendAReducer);
-    }
+const MicrofrontendA = lazyWithMinDelay(() => import('microfrontendA'), 'app', {
+  minDelay: 200,
+  injectReducer,
+  reducerName: 'microfrontendAReducer',
+  key: configA,
+});
 
-    return {
-      default: mod.app ?? mod.default,
-    };
-  })
-);
-
-const MicrofrontendB = lazy(() =>
-  import('microfrontendB').then((mod) => {
-    if (mod.microfrontendBReducer) {
-      injectReducer('microfrontendB', mod.microfrontendBReducer);
-    }
-
-    return {
-      default: mod.app ?? mod.default,
-    };
-  })
-);
+const MicrofrontendB = lazyWithMinDelay(() => import('microfrontendB'), 'app', {
+  minDelay: 200,
+  injectReducer,
+  reducerName: 'microfrontendBReducer',
+  key: configB,
+});
 
 const routes = [
   {

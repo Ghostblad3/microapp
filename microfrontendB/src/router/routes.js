@@ -6,28 +6,33 @@ import { lazy } from 'react';
 
 const BASE_PATH = '/microfrontendB';
 
-const First = lazy(() =>
-  import('../components/First').then((module) => ({
-    default: module.First,
-  }))
+const lazyWithMinDelay = (importFn, exportName, minDelay = 200) =>
+  lazy(() => {
+    const start = Date.now();
+
+    return importFn().then(async (module) => {
+      // Wait for minimum delay
+      const elapsed = Date.now() - start;
+      if (elapsed < minDelay) {
+        await new Promise((r) => setTimeout(r, minDelay - elapsed));
+      }
+
+      return { default: module[exportName] };
+    });
+  });
+
+const First = lazyWithMinDelay(() => import('../components/First'), 'First');
+
+const Second = lazyWithMinDelay(() => import('../components/Second'), 'Second');
+
+const Third = lazyWithMinDelay(
+  () => import('../components/third/Third'),
+  'Third'
 );
 
-const Second = lazy(() =>
-  import('../components/Second').then((module) => ({
-    default: module.Second,
-  }))
-);
-
-const Third = lazy(() =>
-  import('../components/third/Third').then((module) => ({
-    default: module.Third,
-  }))
-);
-
-const NestedComponent = lazy(() =>
-  import('../components/third/NestedComponent').then((module) => ({
-    default: module.NestedComponent,
-  }))
+const NestedComponent = lazyWithMinDelay(
+  () => import('../components/third/NestedComponent'),
+  'NestedComponent'
 );
 
 const routes = [
@@ -48,6 +53,7 @@ const routes = [
       {
         path: `${BASE_PATH}/third/subpage`,
         Component: NestedComponent,
+        exact: true,
       },
     ],
   },
